@@ -19,6 +19,17 @@ def find_single(nums):
     difference = sum_set - sum_twins
     return difference
 
+def find_single2(nums):
+    # running product of XOR
+    nums_sum = 0
+    # for each num in nums
+    for num in nums:
+        # take the XOR of the sum and num
+        nums_sum ^= num
+        # if the num is within the product it will be reduced to zero
+    return nums_sum
+
 numbers_array = [1, 1, 3, 4, 4, 5, 6, 5, 6]
 
 print(find_single(numbers_array))
+print(find_single2(numbers_array))
