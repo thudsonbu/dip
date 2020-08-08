@@ -33,7 +33,6 @@ def compress_in_place2(chars):
                 current_char = chars[location]
             else:
                 break
-
             current_char_count = 1
         else:
             location += 1
