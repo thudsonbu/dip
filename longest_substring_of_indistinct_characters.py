@@ -28,7 +28,6 @@ def find_longest(s, k):
         if length > max_length:
             max_length = length      
         previous_letter = letter
-
     return max_length
 
 print(find_longest('aabc', 3))
