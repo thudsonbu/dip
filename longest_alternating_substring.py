@@ -28,3 +28,7 @@ def different(num,num2):
 
 print(longest_alt_substring("225424272163254474441338664823"))
 print(different(1,2))
+
+# Given a string of digits, return the longest substring with alternating odd/even or 
+# even/odd digits. If two or more substrings have the same length, return the substring 
+# that occurs first. Perform the operations in constant space and time.
