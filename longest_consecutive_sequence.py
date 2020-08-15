@@ -23,7 +23,6 @@ def findSequence2(nums):
     max_len = 0
     bounds = dict()
     for num in nums:
-        print(bounds)
         if num in bounds:
             continue
         left_bound, right_bound = num, num
