@@ -26,6 +26,6 @@ def find_continuous_k(list, k):
     return None
 
 print(find_sum( [1,3,2,5,7,2], 14))
-print(find_continuous_k( [1,7,3,2,5,2], 14))
+print(find_continuous_k( [1,3,2,5,7,2], 14))
 
     
