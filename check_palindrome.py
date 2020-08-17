@@ -1,5 +1,4 @@
 # You are given a doubly linked list. Determine if it is a palindrome.
-# Can you do this for a singly linked list?
 
 class Node(object):
     def __init__(self, val):
