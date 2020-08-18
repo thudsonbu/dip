@@ -8,7 +8,6 @@ class Node:
 
 def print_tree(root):
     tree_print = []
-
     if root.left:
         tree_print.append(root.val)
         tree_print += print_tree(root.left)
