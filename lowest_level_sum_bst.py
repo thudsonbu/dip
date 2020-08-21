@@ -1,4 +1,7 @@
 
+# You are given the root of a binary tree. Find the level for the binary tree with the minimum sum, 
+# and return that value.
+
 class Node: 
     def __init__(self, val, left=None, right=None):
         self.val = val
