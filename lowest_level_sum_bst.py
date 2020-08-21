@@ -13,15 +13,14 @@ def miniumum_level_sum(root):
     children = [root]
     while(len(children) > 0):
         current_level_sum = 0
-        for node in children:
-            current_level_sum += node.val
-        min_sum = min(current_level_sum, min_sum)
         new_children = []
         for node in children:
+            current_level_sum += node.val
             if node.left:
                 new_children.append(node.left)
             if node.right:
                 new_children.append(node.right)
+        min_sum = min(current_level_sum, min_sum)
         children = new_children
     return min_sum
 
