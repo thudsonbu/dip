@@ -1,3 +1,5 @@
+# Given an array of words return the list grouped by anagrams.
+
 import collections
 
 def groupAnagramWords(strs):

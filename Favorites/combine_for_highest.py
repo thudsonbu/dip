@@ -7,4 +7,4 @@ def largestNum(nums):
         else -1))]
     return "".join(str_nums)
 
-print(largestNum([17, 7, 2, 45, 727,777]))
+print(largestNum([17, 7, 2, 45, 727, 777]))
