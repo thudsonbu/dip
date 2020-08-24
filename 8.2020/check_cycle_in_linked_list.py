@@ -8,16 +8,23 @@ def check_cycle(head):
     else: 
         return False
 
-def reverse_list(head):
+def reverse_list(current):
     previous = None
-    current = head
-    nxt = head.next
-    while(nxt):
+    while(current):
+        nxt = current.next
         current.next = previous
         previous = current
         current = nxt
-        nxt = current.next
-    return current
+    return previous
+
+def reverseList(head):
+    new_head = None
+    while head:
+      tmp = head.next
+      head.next = new_head
+      new_head = head
+      head = tmp
+    return new_head
         
 def print_list(root):
     if not root:
