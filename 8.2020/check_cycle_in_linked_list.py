@@ -9,13 +9,15 @@ def check_cycle(head):
         return False
 
 def reverse_list(head):
-    new_head = None
-    while(head):
-        tmp = head.next
-        head.next = new_head
-        new_head = head
-        head = tmp
-    return new_head
+    previous = None
+    current = head
+    nxt = head.next
+    while(nxt):
+        current.next = previous
+        previous = current
+        current = nxt
+        nxt = current.next
+    return current
         
 def print_list(root):
     if not root:
