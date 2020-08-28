@@ -30,10 +30,12 @@ class board(object):
             for item in row:
                 print_row += item + " | "
             print(print_row)
+        print("")
 
     def check_win(self,marker):
-        row_match = True
+
         for row in self.board:
+            row_match = True
             for item in row:
                 if item == marker:
                     continue
@@ -41,8 +43,9 @@ class board(object):
             if row_match:
                 return True
 
-        col_match = True
+        
         for column_num in range(0,len(self.board[0])):
+            col_match = True
             for row_num in range(0,len(self.board[0])):
                 if self.board[row_num][column_num] == marker:
                     continue
@@ -66,7 +69,20 @@ class board(object):
 
 new_board = board()
 new_board.move_o(0,0)
-new_board.move_x(1,1)
 new_board.move_o(0,1)
-new_board.move_x(1,2)
 new_board.move_o(0,2)
+
+new_board = board()
+new_board.move_x(1,0)
+new_board.move_x(1,1)
+new_board.move_x(1,2)
+
+new_board = board()
+new_board.move_o(0,0)
+new_board.move_o(1,1)
+new_board.move_o(2,2)
+
+new_board = board()
+new_board.move_x(0,2)
+new_board.move_x(1,1)
+new_board.move_x(2,0)
