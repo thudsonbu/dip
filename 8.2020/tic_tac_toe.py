@@ -4,7 +4,10 @@ class board(object):
         self.x = 1
 
     def move_x(self, x, y):
-        self.board[y][x] == "x"
+        if self.board[y][x] != "-":
+            print("Position taken")
+            return False
+        self.board[y][x] = "x"
         win = self.check_win("x")
         self.print_board()
         if win:
@@ -12,7 +15,10 @@ class board(object):
 
 
     def move_o(self, x, y):
-        self.board[y][x] == "o"
+        if self.board[y][x] != "-":
+            print("Position taken")
+            return False
+        self.board[y][x] = "o"
         win = self.check_win("o")
         self.print_board()
         if win:
@@ -49,7 +55,7 @@ class board(object):
         for direction in diagonal_locations:
             diag_match = True
             for location in direction:
-                if board[location[0]][location[1]] == marker:
+                if self.board[location[0]][location[1]] == marker:
                     continue
                 diag_match = False
             if diag_match:
@@ -59,4 +65,8 @@ class board(object):
 
 
 new_board = board()
-new_board.print_board()
+new_board.move_o(0,0)
+new_board.move_x(1,1)
+new_board.move_o(0,1)
+new_board.move_x(1,2)
+new_board.move_o(0,2)
