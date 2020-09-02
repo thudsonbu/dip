@@ -1,43 +1,49 @@
-def compare_versions(v1, v2):
-    v1_list = [num for num in v1.split(".")]
-    v2_list = [num for num in v2.split(".")]
-    iterations = min(len(v1_list, v2_list))
-    for i in range(iterations):
-        comp = compare_value(v1_list[i],v2_list[i])
-        if comp == 0:
+def compare_versions(v1,v2):
+    v1 = [section for section in v1.split(".")]
+    v2 = [section for section in v2.split(".")]
+    same_length = len(v1) == len(v2)
+    if not same_length:
+        if len(v1) > len(v2):
+            longer = v1
+            out = 1
+        else:
+            longer = v2
+            out = -1
+    count = 0
+    while count < len(v1) and count < len(v2):
+        v1_val = int(remove_leading_zeros(v1[count]))
+        print("val1: " + str(v1_val))
+        v2_val = int(remove_leading_zeros(v2[count]))
+        print("val2: " + str(v2_val))
+        if v1_val == v2_val and same_length and count == len(v2) - 1:
+            print("yup")
+            return 0
+        elif v1_val == v2_val:
+            count += 1
+            continue
+        elif v1_val > v2_val:
+            return 1
+        else:
+            return -1
+    for section in longer[count::]:
+        if remove_leading_zeros(section) == "":
             continue
         else:
-            return comp
-    if len(v1_list) > len(v2_list):
-        sum = 0
-        for num in v1_list[iterations + 1::]:
-            sum += num
-        if sum > 0:
-            return 1
-    elif len(v1_list) < len(v2_list):
-        sum = 0
-        for num in v2_list[iterations + 1::]:
-            sum += num
-        if sum > 0:
-            return -1
-    else: 
-        return 0
-        
-def compare_value(v1, v2):
-    count = 0
-    sym = v1[count]
-    while sym == "0":
-        count += 1
-        sym = v1[count]
-    v1 = v1[count::]
-    count = 0
-    sym = v2[count]
-    while sym == "0":
-        sym = v2[count]
-    v2 = v2[count::]
-    if v1 > v2:
-        return 1
-    elif v1 < v2:
-        return -1
-    else:
-        return 0
+            return out
+    return 0
+    
+
+
+
+def remove_leading_zeros(str):
+    while len(str) > 0:
+        if str[0] == "0":
+            str = str[1::]
+        else:
+            break
+    return str
+
+print(remove_leading_zeros("001"))
+print(remove_leading_zeros("1"))
+
+print(compare_versions("1","1.01"))
