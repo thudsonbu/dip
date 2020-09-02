@@ -12,11 +12,8 @@ def compare_versions(v1,v2):
     count = 0
     while count < len(v1) and count < len(v2):
         v1_val = int(remove_leading_zeros(v1[count]))
-        print("val1: " + str(v1_val))
         v2_val = int(remove_leading_zeros(v2[count]))
-        print("val2: " + str(v2_val))
         if v1_val == v2_val and same_length and count == len(v2) - 1:
-            print("yup")
             return 0
         elif v1_val == v2_val:
             count += 1
@@ -26,17 +23,14 @@ def compare_versions(v1,v2):
         else:
             return -1
     for section in longer[count::]:
-        if remove_leading_zeros(section) == "":
+        if remove_leading_zeros(section) == "0":
             continue
         else:
             return out
     return 0
-    
-
-
 
 def remove_leading_zeros(str):
-    while len(str) > 0:
+    while len(str) > 1:
         if str[0] == "0":
             str = str[1::]
         else:
@@ -46,4 +40,4 @@ def remove_leading_zeros(str):
 print(remove_leading_zeros("001"))
 print(remove_leading_zeros("1"))
 
-print(compare_versions("1","1.01"))
+print(compare_versions("1.0.1","1.0.0.0.0.0"))
