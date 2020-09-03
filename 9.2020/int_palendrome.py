@@ -2,8 +2,6 @@
 
 # Given an integer, check if that integer is a palindrome.
 
-# import math
-
 # def is_palindrome(n):
 #   # Fill this in.
 
@@ -12,7 +10,27 @@
 # print is_palindrome(1234322)
 # # False
 
+import math
+
 def check_int_palendrom(num):
+    if num == 0:
+        return True
+    k = int(math.log10(num))
+    divisor = 10**k
+    while num > 0:
+        first_digit = num // divisor
+        last_digit = num % 10
+        if first_digit != last_digit:
+            return False
+        num = num % divisor
+        num = num // 10
+        divisor /= 100
+    return True
+
+
+def check_int_palendrom2(num):
+    if num == 0:
+        return True
     store = num
     zeros = 1
     while num >= zeros:
@@ -30,7 +48,9 @@ def check_int_palendrom(num):
 
     # substract from itself reversed
 
-def check_int_palendrom2(num):
+def check_int_palendrom3(num):
+    if num == 0:
+        return True
     num = str(num)
     reverse_position = -1
     for position in range(0,int(len(num)/2)):
@@ -40,9 +60,22 @@ def check_int_palendrom2(num):
             return False
     return True
 
+
+
 print("True " + str(check_int_palendrom(12321)))
 print("False " + str(check_int_palendrom(12322)))
 print("True " + str(check_int_palendrom(1)))
 print("True " + str(check_int_palendrom(123321)))
-print("False " + str(check_int_palendrom(12)))
+print("True " + str(check_int_palendrom(0)))
 
+print("True " + str(check_int_palendrom2(12321)))
+print("False " + str(check_int_palendrom2(12322)))
+print("True " + str(check_int_palendrom2(1)))
+print("True " + str(check_int_palendrom2(123321)))
+print("True " + str(check_int_palendrom2(0)))
+
+print("True " + str(check_int_palendrom3(12321)))
+print("False " + str(check_int_palendrom3(12322)))
+print("True " + str(check_int_palendrom3(1)))
+print("True " + str(check_int_palendrom3(123321)))
+print("True " + str(check_int_palendrom3(0)))
