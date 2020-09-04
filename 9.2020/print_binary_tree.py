@@ -50,7 +50,6 @@ class Node(object):
             max_depth = depth
         return bst_map, max_depth
         
-        
 
 tree = Node('a')
 tree.left = Node('b')
