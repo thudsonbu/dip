@@ -17,6 +17,7 @@
 
 from collections import Counter
 
+
 class Node():
     def __init__(self, value, left=None, right=None):
         self.val = value
@@ -27,6 +28,7 @@ class Node():
 def most_freq_subtree_sum(root):
     store, sum_list = get_sum_list(root)
     return Counter(sum_list).most_common(1)
+
 
 def get_sum_list(root):
     sum_list = []
@@ -42,5 +44,21 @@ def get_sum_list(root):
     sum_list.append(sum_self)
     return sum_self, sum_list
 
+
+def helper(root, counter):
+    if root == None:
+        return 0
+    total = root.val + helper(root.left, counter) + helper(root.right, counter)
+    counter[total] += 1
+    return total
+
+def most_freq_subtree_sum2(root):
+    counter = Counter()
+    helper(root, counter)
+    # most_common returns [(val, count)]
+    # so need to take the first element twice
+    return counter.most_common(1)[0][0]
+
 root = Node(3, Node(1), Node(-3))
 print(most_freq_subtree_sum(root))
+print(most_freq_subtree_sum2(root))
