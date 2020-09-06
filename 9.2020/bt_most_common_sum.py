@@ -27,7 +27,7 @@ class Node():
 
 def most_freq_subtree_sum(root):
     store, sum_list = get_sum_list(root)
-    return Counter(sum_list).most_common(1)
+    return Counter(sum_list).most_common(1)[0][0]
 
 
 def get_sum_list(root):
