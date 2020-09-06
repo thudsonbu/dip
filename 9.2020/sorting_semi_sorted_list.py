@@ -18,5 +18,16 @@ def sort_partially_sorted(nums, k):
         out.append(heapq.heappop(nums))
     return out
 
+def sort_partiall_sorted2(nums, k):
+    h = []
+    sorted = []
+    k += 1
+    for n in nums[:k]:
+        heapq.heappush(h,n)
+    for n in nums[k:]:
+        sorted.append(heapq.heapreplace(h, n))
+    while len(h) > 0:
+        sorted.append(heapq.heappop(h))
+    return sorted
 
 print(sort_partially_sorted([3, 2, 6, 5, 4], 2))
