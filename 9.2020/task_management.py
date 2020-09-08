@@ -22,7 +22,8 @@ def findTime(arr, cooldown):
                 for i in range(cooldowns):
                     for dec_task in task_cooldowns:
                         task_cooldowns[dec_task] -= 1
-                        print("Task " + str(dec_task) + " Extra cooldowns " + str(task_cooldowns[dec_task]))
+                        print("Task " + str(dec_task) +
+                              " Extra cooldowns " + str(task_cooldowns[dec_task]))
                 task_cooldowns[task] = cooldowns + 1
         except:
             task_cooldowns[task] = cooldown + 1
@@ -30,8 +31,23 @@ def findTime(arr, cooldown):
         for decrement_task in task_cooldowns:
             if task_cooldowns[decrement_task] > 0:
                 task_cooldowns[decrement_task] -= 1
-                print("Task " + str(decrement_task) + " Cooldowns " + str(task_cooldowns[decrement_task]))
+                print("Task " + str(decrement_task) + " Cooldowns " +
+                      str(task_cooldowns[decrement_task]))
     return len(arr) + extracooldowns
+
+
+def findTime(tasks, cooldown):
+    lastPos = {}
+    current = 0
+
+    for task in tasks:
+        if task in lastPos:
+            if current - lastPos[task] <= cooldown:
+                current = cooldown + lastPos[task] + 1
+        lastPos[task] = current
+        current = current + 1
+        
+    return current
         
 
 print(findTime([1, 1, 2, 1], 2))
