@@ -46,10 +46,8 @@ def findTime(tasks, cooldown):
                 current = cooldown + lastPos[task] + 1
         lastPos[task] = current
         current = current + 1
-        
+
     return current
         
 
 print(findTime([1, 1, 2, 1], 2))
-
-# 1 _
