@@ -12,8 +12,8 @@ def is_knight_on_board(x,y,k):
 
 def get_valid_moves(x,y,k):
     valid_moves = check_valid_moves(x,y)
-    sub_moves = []
     if k > 1:
+        sub_moves = []
         for move in valid_moves:
             sub_moves += get_valid_moves(move[0],move[1],k-1)
         return valid_moves + sub_moves
@@ -23,7 +23,7 @@ def check_valid_moves(x,y):
     moves = [[-1,2],[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1]]
     valid_moves = []
     for move in moves:
-        if x in range(0,8) and y in range(0,8):
+        if x + move[0] in range(0,8) and y + move[1] in range(0,8):
             new_cor = [x + move[0], y + move[1]]
             valid_moves.append(new_cor)
     return valid_moves
