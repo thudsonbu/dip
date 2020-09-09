@@ -1,5 +1,5 @@
 def is_knight_on_board(x,y,k):
-    total_theoretical_moves = 8*k
+    total_theoretical_moves = 8**k
     current_postion = []
     current_postion.append(x)
     current_postion.append(y)
@@ -10,7 +10,9 @@ def get_valid_moves(position, k):
     if k == 0:
         return []
     valid_moves = check_valid_moves(position)
-    for move in valid_moves:
+    length = len(valid_moves)
+    for i in range(length):
+        move = valid_moves[i]
         valid_moves += get_valid_moves(move,k-1)
     return valid_moves
 
@@ -28,10 +30,11 @@ def check_valid_moves(input_position):
             valid_y = True
         if valid_x and valid_y:
             new_cor = []
-            new_cor.append(x)
-            new_cor.append(y)
+            new_cor.append(x + move[0])
+            new_cor.append(y + move[1])
             valid_moves.append(new_cor)
     return valid_moves
 
 print(is_knight_on_board(4,4,1))
 print(is_knight_on_board(0,0,1))
+print(is_knight_on_board(0,0,2))
