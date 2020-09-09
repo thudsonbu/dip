@@ -1,37 +1,30 @@
+# Hi, here's your problem today. This problem was recently asked by Google:
+
+# A chess board is an 8x8 grid. Given a knight at any position (x, y) and a number of moves k, 
+# we want to figure out after k random moves by a knight, the probability that the knight will 
+# still be on the chessboard. Once the knight leaves the board it cannot move again and will be 
+# considered off the board.
+
 def is_knight_on_board(x,y,k):
     total_theoretical_moves = 8**k
-    current_postion = []
-    current_postion.append(x)
-    current_postion.append(y)
-    all_possible_moves = get_valid_moves(current_postion,k)
+    all_possible_moves = get_valid_moves(x,y,k)
     return len(all_possible_moves) / total_theoretical_moves
 
-def get_valid_moves(position, k):
-    if k == 0:
-        return []
-    valid_moves = check_valid_moves(position)
-    length = len(valid_moves)
-    for i in range(length):
-        move = valid_moves[i]
-        valid_moves += get_valid_moves(move,k-1)
+def get_valid_moves(x,y,k):
+    valid_moves = check_valid_moves(x,y)
+    sub_moves = []
+    if k > 1:
+        for move in valid_moves:
+            sub_moves += get_valid_moves(move[0],move[1],k-1)
+        return valid_moves + sub_moves
     return valid_moves
 
-def check_valid_moves(input_position):
-    x = input_position[0]
-    y = input_position[1]
+def check_valid_moves(x,y):
     moves = [[-1,2],[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1]]
     valid_moves = []
     for move in moves:
-        valid_x = False
-        valid_y = False
-        if x + move[0] >= 0 and x + move[0] <= 7:
-            valid_x = True
-        if y + move[1] >= 0 and y + move[1] <= 7:
-            valid_y = True
-        if valid_x and valid_y:
-            new_cor = []
-            new_cor.append(x + move[0])
-            new_cor.append(y + move[1])
+        if x in range(0,8) and y in range(0,8):
+            new_cor = [x + move[0], y + move[1]]
             valid_moves.append(new_cor)
     return valid_moves
 
