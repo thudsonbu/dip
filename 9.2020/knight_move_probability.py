@@ -5,21 +5,21 @@
 # still be on the chessboard. Once the knight leaves the board it cannot move again and will be 
 # considered off the board.
 
-def is_knight_on_board(x,y,k):
+def find_chance_knight_on_board(x,y,k):
     total_theoretical_moves = 8**k
-    all_possible_moves = get_valid_moves(x,y,k)
+    all_possible_moves = get_all_possible_moves(x,y,k)
     return len(all_possible_moves) / total_theoretical_moves
 
-def get_valid_moves(x,y,k):
-    valid_moves = check_valid_moves(x,y)
+def get_all_possible_moves(x,y,k):
+    valid_moves = check_valid_moves_for_position(x,y)
     if k > 1:
         sub_moves = []
         for move in valid_moves:
-            sub_moves += get_valid_moves(move[0],move[1],k-1)
+            sub_moves += get_all_possible_moves(move[0],move[1],k-1)
         return valid_moves + sub_moves
     return valid_moves
 
-def check_valid_moves(x,y):
+def check_valid_moves_for_position(x,y):
     moves = [[-1,2],[1,2],[2,1],[2,-1],[1,-2],[-1,-2],[-2,-1],[-2,1]]
     valid_moves = []
     for move in moves:
@@ -28,6 +28,7 @@ def check_valid_moves(x,y):
             valid_moves.append(new_cor)
     return valid_moves
 
-print(is_knight_on_board(4,4,1))
-print(is_knight_on_board(0,0,1))
-print(is_knight_on_board(0,0,2))
+print(find_chance_knight_on_board(4,4,1))
+print(find_chance_knight_on_board(0,0,1))
+print(find_chance_knight_on_board(0,0,2))
+print(find_chance_knight_on_board(4,4,9))
