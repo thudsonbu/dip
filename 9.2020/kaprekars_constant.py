@@ -29,6 +29,20 @@ def sort_ascending(n):
     ascending = sorted([n for n in str(n)])
     return int(''.join(ascending))
 
+def num_kaprekar_iterations(n):
+    if n == KAPREKAR_CONSTANT:
+        return 0
+
+    n_str = str(n)
+    asc_num = int(''.join(sorted(n_str)))
+    desc_str = sorted(n_str, reverse=True)
+
+    desc_str = desc_str + ['0']*(4 - len(desc_str))
+    desc_num = int(''.join(desc_str))
+
+    new_num = desc_num - asc_num
+
+    return num_kaprekar_iterations(new_num) + 1
 
 
 print(sort_descending_padded(13))
