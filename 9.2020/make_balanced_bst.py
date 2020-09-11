@@ -20,28 +20,36 @@ class Node:
 
 
 def create_height_balanced_bst(nums):
-    print("----------------")
+    # print("----------------")
     split_location = (int(len(nums)/2))
     lower_half = nums[0:split_location]
-    print("Node left values: " + str(lower_half))
+    # print("Node left values: " + str(lower_half))
     upper_half = nums[split_location+1::]
-    print("Node right values: " + str(upper_half))
+    # print("Node right values: " + str(upper_half))
     center_node_val = nums[split_location]
-    print("Node: " + str(center_node_val))
-    if len(upper_half) > 0:
-        right_node = create_height_balanced_bst(upper_half)
-    else:
-        right_node = None
-    if len(lower_half) > 0:
-        left_node = create_height_balanced_bst(lower_half)
-    else: 
-        left_node = None
+    # print("Node: " + str(center_node_val))
+    right_node = None if len(upper_half) == 0 else create_height_balanced_bst(upper_half)
+    left_node = None if len(lower_half) == 0 else create_height_balanced_bst(lower_half)
     center_node = Node(center_node_val,left_node,right_node)
     return center_node
+
+def helper(nums, low, high):
+    if low == high:
+        return None
+    middle_index = int((low + high)/2)
+    root = Node(nums[middle_index])
+    root.left = helper(nums, low, middle_index)
+    root.right = helper(nums, middle_index + 1, high)
+    return root
+
+def create_height_balanced_bst2(nums):
+    return helper(nums, 0, len(nums))
 
 
 tree = create_height_balanced_bst([1, 2, 3, 4, 5, 6, 7, 8])
 tree2 = create_height_balanced_bst([1,2,3,4,5,6,7,8,9])
+tree = create_height_balanced_bst2([1, 2, 3, 4, 5, 6, 7, 8])
+tree2 = create_height_balanced_bst2([1,2,3,4,5,6,7,8,9])
 # 53214768
 #  (pre-order traversal)
 #       5
