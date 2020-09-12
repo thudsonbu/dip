@@ -46,10 +46,10 @@ def create_height_balanced_bst2(nums):
     return helper(nums, 0, len(nums))
 
 
-tree = create_height_balanced_bst([1, 2, 3, 4, 5, 6, 7, 8])
+tree1 = create_height_balanced_bst([1, 2, 3, 4, 5, 6, 7, 8])
 tree2 = create_height_balanced_bst([1,2,3,4,5,6,7,8,9])
-tree = create_height_balanced_bst2([1, 2, 3, 4, 5, 6, 7, 8])
-tree2 = create_height_balanced_bst2([1,2,3,4,5,6,7,8,9])
+tree3 = create_height_balanced_bst2([1, 2, 3, 4, 5, 6, 7, 8])
+tree4 = create_height_balanced_bst2([1,2,3,4,5,6,7,8,9])
 # 53214768
 #  (pre-order traversal)
 #       5
