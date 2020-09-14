@@ -23,36 +23,37 @@ class Node:
 def generate_bst(nums):
     trees = []
     for num in nums:
-        nums_left = range(num)
-        print(nums_left)
-        nums_right = range(num+2,nums[-1])
-        print(nums_right)
-        left_trees = generate_bst(nums_left)
-        right_trees = generate_bst(nums_right)
-        for tree_left in left_trees:
-            for tree_right in right_trees:
-                new_node = Node(num,tree_left,tree_right)
-                trees.append(new_node)
-        if len(left_trees) == 0:
-            for tree_right in right_trees:
-                new_node = Node(num,None,tree_right)
-                trees.append(new_node)
-        if len(right_trees) == 0:
-            for tree_left in left_trees:
-                new_node = Node(num,tree_left,None)
-                trees.append(new_node)
+        left_nums = [n for n in nums if n < num]
+        right_nums = [n for n in nums if n > num]
+        if len(left_nums) == 0 and len(right_nums) == 0:
+            trees.append(Node(num,None,None))
+            return trees
+        elif len(left_nums) == 0:
+            right_trees = generate_bst(right_nums)
+            for right_tree in right_trees:
+                trees.append(Node(num,None,right_tree))
+            continue
+        elif len(right_nums) == 0:
+            left_trees = generate_bst(left_nums)
+            for left_tree in left_trees:
+                trees.append(Node(num,left_tree,None))
+            continue
+        elif len(right_nums) != 0 and len(left_nums) != 0:
+            all_left_trees = generate_bst(left_nums)
+            all_right_trees = generate_bst(right_nums)
+            for left_tree in all_left_trees:
+                for right_tree in all_right_trees:
+                    trees.append(Node(num,left_tree,right_tree))
+        else:
+            print("Something is broken")
     return trees
 
 def generate_bst_main(n):
-    trees = generate_bst(range(n+1))
+    trees = generate_bst(range(1,n+1))
     return trees
-
-    
-
 
 for tree in generate_bst_main(3):
     print(tree)
-    print("bacon")
 
 # Pre-order traversals of binary trees from 1 to n.
 # 123
