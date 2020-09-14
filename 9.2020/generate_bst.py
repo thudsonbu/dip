@@ -52,7 +52,25 @@ def generate_bst_main(n):
     trees = generate_bst(range(1,n+1))
     return trees
 
+def generate_bst_helper(low,high):
+    if low == high:
+        return [None]
+    trees = []
+    for num in range(low,high):
+        left_trees = generate_bst_helper(low,num)
+        right_trees = generate_bst_helper(num+1,high)
+        for left_tree in left_trees:
+            for right_tree in right_trees:
+                trees.append(Node(num,left_tree,right_tree))
+    return trees
+
+def generate_bst_main2(n):
+    return generate_bst_helper(1, n + 1)
+
 for tree in generate_bst_main(3):
+    print(tree)
+
+for tree in generate_bst_main2(3):
     print(tree)
 
 # Pre-order traversals of binary trees from 1 to n.
