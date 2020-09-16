@@ -28,7 +28,7 @@ def utf8_validator(bytes):
     len_bytes = len(bytes)
     if len_bytes == 0 or len_bytes > 4:
         return False
-    if bytes[0] & BYTE_MASKS[bytes_len] != BYTE_EQUAL[bytes_len]:
+    if bytes[0] & BYTE_MASKS[len_bytes] != BYTE_EQUAL[len_bytes]:
         return False
     for b in bytes[1:]:
         if b & 0b11000000 != 0b10000000:
