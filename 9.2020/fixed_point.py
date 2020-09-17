@@ -71,32 +71,22 @@ def find_fixed_point(nums):
 # BINARY SEARCH SOLUTION
 def find_fixed_point2(start_index, nums): # start index should be 0 when first called
     print("Numbers: " + str(nums) + " Start index: " + str(start_index))
-    if len(nums) == 1:
-        if nums[start_index] == start_index:
-            return nums[start_index]
-        else:
-            return None
-    # if two left check both
-    if len(nums) == 2:
-        if nums[0] == start_index:
-            return nums[0]
-        elif nums[1] == start_index + 1:
- 
-            return nums[1]
-        else:
-            return None
-    # get mid point
     mid = int(len(nums)/2)
-    # check status of mid point
-    if nums[mid+start_index] == mid+start_index:
+    if len(nums) == 0:
+        return None
+    elif nums[mid+start_index] == mid+start_index:
         return nums[mid+start_index]
-    elif nums[mid+start_index] < mid+start_index:
-        return find_fixed_point2(mid,nums[mid+1::])
-    else:
+    elif nums[mid+start_index] > mid+start_index:
         return find_fixed_point2(start_index,nums[0:mid])
+    else:
+        return find_fixed_point2(mid,nums[mid+1::])
+        
 
 print(find_fixed_point([-5,1,3,4]))
-print(find_fixed_point2(0,[-5,1,3,4]))
+print(find_fixed_point2(0,[-5,1,4,5,6,10]))
+print(find_fixed_point2(0,[-5,2,3,6,9]))
+print(find_fixed_point2(0,[-5,1,3,6,9]))
+print(find_fixed_point2(0,[-1]))
 
             
 
