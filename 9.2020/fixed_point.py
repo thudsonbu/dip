@@ -5,6 +5,27 @@
 # a fixed point (there can be many, just return 1) in a sorted list of distinct elements, 
 # or return None if it doesn't exist.
 
+
+# BINARY SEARCH SOLUTION
+def find_fixed_point2(start_index, nums): # start index should be 0 when first called
+    print("Numbers: " + str(nums) + " Start index: " + str(start_index))
+    mid = int(len(nums)/2)
+    if len(nums) == 0:
+        return None
+    elif nums[mid+start_index] == mid+start_index:
+        return nums[mid+start_index]
+    elif nums[mid+start_index] > mid+start_index:
+        return find_fixed_point2(start_index,nums[0:mid])
+    else:
+        return find_fixed_point2(mid,nums[mid+1::])
+        
+
+print(find_fixed_point2(0,[-5,1,4,5,6,10]))
+print(find_fixed_point2(0,[-5,2,3,6,9]))
+print(find_fixed_point2(0,[-5,1,3,6,9]))
+print(find_fixed_point2(0,[-1]))
+
+
 # BAD SOLUTION
 def find_fixed_point(nums):
     if nums[0] > 0 or nums[len(nums) - 1] < len(nums)-1:
@@ -68,25 +89,8 @@ def find_fixed_point(nums):
         
         return None
 
-# BINARY SEARCH SOLUTION
-def find_fixed_point2(start_index, nums): # start index should be 0 when first called
-    print("Numbers: " + str(nums) + " Start index: " + str(start_index))
-    mid = int(len(nums)/2)
-    if len(nums) == 0:
-        return None
-    elif nums[mid+start_index] == mid+start_index:
-        return nums[mid+start_index]
-    elif nums[mid+start_index] > mid+start_index:
-        return find_fixed_point2(start_index,nums[0:mid])
-    else:
-        return find_fixed_point2(mid,nums[mid+1::])
-        
-
 print(find_fixed_point([-5,1,3,4]))
-print(find_fixed_point2(0,[-5,1,4,5,6,10]))
-print(find_fixed_point2(0,[-5,2,3,6,9]))
-print(find_fixed_point2(0,[-5,1,3,6,9]))
-print(find_fixed_point2(0,[-1]))
+
 
             
 
