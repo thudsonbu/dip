@@ -20,28 +20,59 @@ class Node:
         self.left = left
         self.right = right
 
+def zigzag_order2(tree):
+    result = []
+    current_level = []
+    next_level = []
+    left_to_right = True
+    current_level.append(tree)
+
+    while len(current_level) > 0:
+        node = current_level.pop()
+        result.append(node.value)
+
+        if left_to_right:
+            if node.left:
+                next_level.append(node.left)
+            if node.right:
+                next_level.append(node.right)
+        else:
+            if node.right:
+                next_level.append(node.right)
+            if node.left:
+                next_level.append(node.left)
+
+        if len(current_level) == 0:
+            next_level, current_level = current_level, next_level
+            left_to_right = not left_to_right
+
+    return result
+
+
+
 def zigzag_order(tree):
     pre_arr = get_tree_array(tree)
     zig_arr = [pre_arr.pop(0)]
     traverse_backward = True
     skip = int(len(pre_arr)/2)
+
     while skip >= 1:
         arr_to_append = []
         pos = len(pre_arr) - skip
+
         while pos >= 0:
             arr_to_append.append(pre_arr.pop(pos))
             pos -= skip
+
         if traverse_backward:
             zig_arr += arr_to_append
         else:
             zig_arr += reversed(arr_to_append)
+
         traverse_backward = False if traverse_backward else True
         skip = int((skip - 1)/2)
+
     return zig_arr
-
-        
-
-    return 
 
 def get_tree_array(tree):
     arr = [tree.value]
@@ -60,5 +91,5 @@ n3 = Node(3, n6, n7)
 n1 = Node(1, n2, n3)
 
 print(zigzag_order(n1))
-print(get_tree_array(n1))
+print(zigzag_order2(n1))
 # [1, 3, 2, 4, 5, 6, 7]
