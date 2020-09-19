@@ -7,56 +7,29 @@
 # Output: (2, 4)
 # Explanation: Sorting the window (2, 4) which is [7, 5, 6] will also means that the whole list is sorted.
 
+
 def min_window_to_sort(nums):
-    mistake = False
-    mistake_fixed = True
-    biggest_mistake = nums[0]
-    first_mistake_pos = len(nums)
-    last_mistake_pos = 0
+    lower_bound = upper_bound = -1
+    max_num = -float('inf')
 
-    for i in range(1,len(nums)):
-        current_number, previous_num = nums[i], nums[i-1]
-        if current_number < previous_num:
-            mistake = True
-            mistake_fixed = False
-            biggest_mistake = previous_num if previous_num > biggest_mistake else biggest_mistake
-            first_mistake_pos = i-1 if i-1 < first_mistake_pos else first_mistake_pos
-        elif current_number > biggest_mistake and not mistake_fixed:
-            last_mistake_pos = i-2
-            biggest_mistake = nums[0] - 1
-            mistake_fixed = True
+    for i in range(len(nums)):
+        if max_num < nums[i]:
+            max_num = nums[i]
+        if nums[i] < max_num:
+            upper_bound = i
 
-    last_mistake_pos = len(nums)-1 if not mistake_fixed else last_mistake_pos
+    min_num = float('inf')
+    for i in reversed(range(len(nums)-1)):
+        if nums[i] < min_num:
+            min_num = nums[i]
+        if min_num < nums[i]:
+            lower_bound = i
 
-    mistake_fixed = True
-    biggest_mistake = nums[len(nums)-1]
-    first_mistake_pos_desc = 0
-    last_mistake_pos_desc = len(nums)
-
-    for i in reversed(range(0,len(nums)-1)):
-        current_number, previous_num = nums[i], nums[i+1]
-        if current_number > previous_num:
-            mistake = True
-            mistake_fixed = False
-            biggest_mistake = previous_num if previous_num < biggest_mistake else biggest_mistake
-            first_mistake_pos_desc = i+1 if i+1 > first_mistake_pos_desc else first_mistake_pos_desc
-        elif current_number > biggest_mistake and not mistake_fixed:
-            last_mistake_pos_desc = i+2
-            biggest_mistake = nums[len(nums)-1]
-            mistake_fixed = True
-
-    last_mistake_pos_desc = 0 if not mistake_fixed else last_mistake_pos_desc
-
-    left = min(last_mistake_pos_desc,first_mistake_pos)
-    right = max(first_mistake_pos_desc,last_mistake_pos)
-
-    if mistake:
-        return (left,right)
-    else:
-        return None
+    return (lower_bound, upper_bound)
 
 
 print(min_window_to_sort([2, 4, 7, 5, 6, 8, 9]))
 print(min_window_to_sort([3, 2, 1, 4, 5, 6, 7]))
 print(min_window_to_sort([1, 2, 3, 4, 0, 5, 6]))
 # (2, 4)
+
