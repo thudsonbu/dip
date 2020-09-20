@@ -11,6 +11,13 @@ class Rectangle():
     self.max_x = max_x
     self.max_y = max_y
 
+# GOOD SOLUTION (12 MINTUES)
+def intersection_area2(rect1, rect2):
+    x_intersection = min(rect1.max_x,rect2.max_x) - max(rect1.min_x,rect2.min_x)
+    y_intersection = min(rect1.max_y,rect2.max_y) - max(rect1.min_y,rect2.min_y)
+    return x_intersection*y_intersection if x_intersection > 0 and y_intersection > 0 else 0
+
+# FIRST SOLUTION (5 MINUTES)
 def intersection_area(rect1, rect2):
     x_intersection = intersection_area_helper((rect1.min_x,rect1.max_x),(rect2.min_x,rect2.max_x))
     y_intersection = intersection_area_helper((rect1.min_y,rect1.max_y),(rect2.min_y,rect2.max_y))
@@ -23,11 +30,6 @@ def intersection_area_helper(values_1,values_2):
             overlap += 1
     overlap = overlap-1 if overlap > 0 else overlap
     return overlap
-
-def intersection_area2(rect1, rect2):
-    x_intersection = min(rect1.max_x,rect2.max_x) - max(rect1.min_x,rect2.min_x)
-    y_intersection = min(rect1.max_y,rect2.max_y) - max(rect1.min_y,rect2.min_y)
-    return x_intersection*y_intersection if x_intersection > 0 and y_intersection > 0 else 0
 
 #  BBB
 # AXXB
