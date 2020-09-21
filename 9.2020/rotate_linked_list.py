@@ -25,7 +25,9 @@ def rotate_list(llist, k):
         pos_node = pos_node.next
         pos += 1
     pos_node.next = llist
+    print(pos)
     k = k % pos
+    print(k)
     pos = 1
     pos_node = llist
     while pos < k:
@@ -37,7 +39,13 @@ def rotate_list(llist, k):
 
 # Order is 1, 2, 3, 4
 llist = Node(1, Node(2, Node(3, Node(4))))
+llist2 = Node(0, Node(1, Node(2, Node(3, Node(4)))))
+llist3 = Node(2, Node(3, Node(4)))
+
+
 
 # Order should now be 3, 4, 1, 2
 print(rotate_list(llist, 2))
+print(rotate_list(llist2, 2))
+print(rotate_list(llist3, 2))
 # 3412
