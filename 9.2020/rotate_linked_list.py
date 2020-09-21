@@ -24,18 +24,38 @@ def rotate_list(llist, k):
     while pos_node.next:
         pos_node = pos_node.next
         pos += 1
+
     pos_node.next = llist
-    print(pos)
     k = k % pos
-    print(k)
     pos = 1
     pos_node = llist
     while pos < k:
         pos_node = pos_node.next
         pos += 1
+        
     new_start = pos_node.next
     pos_node.next = None
     return new_start
+
+def rotate_list(list, k):
+    length = 0
+    current = list
+    while current:
+        length += 1
+        current = current.next
+
+    k = k % length
+    fast, slow = list, list
+    for _ in range(k):
+        fast = fast.next
+    while fast.next is not None:
+        fast = fast.next
+        slow = slow.next
+
+    fast.next = list
+    head = slow.next
+    slow.next = None
+    return head
 
 # Order is 1, 2, 3, 4
 llist = Node(1, Node(2, Node(3, Node(4))))
