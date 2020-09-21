@@ -41,3 +41,5 @@ print(intersection_area(rect1, rect2))
 print(intersection_area2(rect1, rect2))
 
 # 2
+
+        
