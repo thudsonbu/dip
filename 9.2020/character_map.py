@@ -10,6 +10,7 @@
 # Ouput: False # a can't map to d and e 
 # Here's some starter code:
 
+# 20 minutes
 def has_character_map(str1, str2):
     if len(str1) != len(str2): return False
 
