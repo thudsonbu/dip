@@ -51,5 +51,8 @@ points = [
     Point(2, 2),
     Point(3, 3),
 ]
+
+
+print(closest_points(points, 2, Point(0, 2)))
 print(closest_points(points, 2, Point(0, 2)))
 # [(0, 0), (1, 1)]
