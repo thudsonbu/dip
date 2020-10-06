@@ -6,12 +6,15 @@
 # Here's an example and some starter code:
 
 def make_change(coins, n):
-    coins, change_used = sorted(coins, reverse=True), 0
+    coins = sorted(coins, reverse=True)
+    change_used = 0
+
     while coins:
         current_coin = coins.pop(0)
         while n >= current_coin:
             n -= current_coin
             change_used += 1
+
     if n > 0:
         return None
     else:
