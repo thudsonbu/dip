@@ -21,11 +21,26 @@ lettersMaps = {
 
 validWords = ['dog', 'fish', 'cat', 'fog']
 
+def makeWords2(phone):
+    digits = []
+    for digit in phone:
+        digits.append(digit)
+    return makeWords_helper(digits, [])
+
+def makeWords_helper(digits, letters):
+    if not digits:
+        word = ''.join(letters)
+        if word in validWords:
+            return [word]
+        return []
+
+    chars = lettersMaps[digits[0]]
+    found_words = []
+    for char in chars:
+        found_words += makeWords_helper(digits[1:], letters + [char])
+    return found_words
+
 def makeWords(phone):
-    # either convert each word to numbers and check if sequence in number
-    # go through number checking for word matches
-        # need to keep track of where we are in a word
-        # special category for word in progress
     found_words = []
     potential_words = []
     for number in phone:
@@ -52,4 +67,5 @@ def makeWords(phone):
     
 
 print(makeWords('364'))
+print(makeWords2('364'))
 # ['dog', 'fog']
