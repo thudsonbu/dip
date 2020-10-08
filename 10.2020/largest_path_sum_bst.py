@@ -2,8 +2,6 @@
 
 # Given a binary tree, find and return the largest path from root to leaf.
 
-# Here's an example and some starter code:
-
 class Node:
     def __init__(self, value, left=None, right=None):
         self.value = value
@@ -19,7 +17,7 @@ def largest_path_sum(tree):
         left_sum, left_arr = largest_path_sum(tree.left)
     else:
         left_sum, left_arr = 0, []
-        
+
     if right_sum > left_sum:
         return right_sum + tree.value, right_arr + [tree.value]
     else:
