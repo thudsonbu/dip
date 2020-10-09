@@ -64,7 +64,6 @@ def makeWords(phone):
     
     return found_words
 
-    
 
 print(makeWords('364'))
 print(makeWords2('364'))
