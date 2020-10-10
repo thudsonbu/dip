@@ -13,7 +13,15 @@ def rotate_list(nums, k):
             old_num = new_num
         nums[0] = old_num
         
+def reverse(nums, start, end):
+    for i in range((end - start)//2):
+        nums[start + i], nums[end - 1 - i] = nums[end - 1 - i], nums[start + i]
 
+
+def rotate_list2(nums, k):
+    reverse(nums, 0, k)
+    reverse(nums, k, len(nums))
+    reverse(nums, 0, len(nums))
 
 def get_pos(pos, len, k):
     new_pos = pos + k
@@ -24,5 +32,8 @@ def get_pos(pos, len, k):
 
 a = [1, 2, 3, 4, 5]
 rotate_list(a, 2)
+b = [1,2,3,4,5]
+rotate_list2(b,2)
 print(a)
+print(b)
 # [3, 4, 5, 1, 2]
