@@ -5,11 +5,13 @@
 # Here's an example and some starter code
 
 def rotate_list(nums, k):
-    old_pos = 0
-    old_num = nums[old_pos]
-    new_pos = get_pos(old_pos, len(nums), k)
-    new_num = nums[new_pos]
-    for num in nums:
+    for i in range(0,k+1):
+        old_num = nums[0]
+        for i in range(1,len(nums)):
+            new_num = nums[i]
+            nums[i] = old_num
+            old_num = new_num
+        nums[0] = old_num
         
 
 
