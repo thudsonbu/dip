@@ -48,9 +48,6 @@ assert parse_number('-4.0e4') == True, '-4.0e4 is a number'
 assert parse_number('..') == False, '.. is not a number'
 assert parse_number('--5') == False, '--5 is not a number'
 assert parse_number('-4.0.0') == False, '-4.0.0 is not a number'
-assert parse_number('-4.0e4') == True, '-4.0.0 is not a number'
-
-# False
 
 
 
