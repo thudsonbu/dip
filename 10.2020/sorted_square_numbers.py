@@ -17,6 +17,13 @@ def square_numbers2(nums):
             nums.pop(-1)
     return sorted_list
 
+print(square_numbers2([-5, -3, -1, 0, 1, 4, 5]))
+# [0, 1, 1, 9, 16, 25, 25]
+
+assert square_numbers2([]) == [], "No list yeilds nothing"
+assert square_numbers2([-1,0,1]) == [0,1,1], "-1,0,1 yeilds 0,1,1"
+assert square_numbers2([-5,-4,-1,0,1,3,7]) == [0,1,1,9,16,25,49], "Expected test"
+
 # Begin from the negative and positve sides appending which has higher absolute value squared
 def square_numbers(nums):
     sorted_list = []
@@ -39,8 +46,5 @@ def square_numbers(nums):
         sorted_list.insert(0, start*start)
     return sorted_list
 
-
-
 print(square_numbers([-5, -3, -1, 0, 1, 4, 5]))
-print(square_numbers2([-5, -3, -1, 0, 1, 4, 5]))
-# [0, 1, 1, 9, 16, 25, 25]
+
