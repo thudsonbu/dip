@@ -2,6 +2,9 @@
 
 # Given a binary tree, find the level in the tree where the sum of all nodes on that level is the greatest.
 
+from collections import defaultdict
+import operator
+
 class Node:
     def __init__(self, value, left=None, right=None):
         self.value = value
@@ -10,6 +13,23 @@ class Node:
 
     def __repr__(self):
         return f"(Value: {self.value} Left: {self.left} Right: {self.right})"
+
+def helper2(node, level_sum, level=0):
+    if node is None:
+        return 0
+
+    level_sum[level] += node.value
+    helper2(node.left, level_sum, level+1)
+    helper2(node.right, level_sum, level+1)
+
+
+def tree_level_max_sum2(root):
+    level_sum = defaultdict(int)
+    helper2(root, level_sum)
+
+    # Return key with the max value 
+    return max(level_sum.items(), key=operator.itemgetter(1))[0]
+
 
 def tree_level_max_sum(root):
     root_val, sums_arr = tree_level_max_sum_helper(root)
