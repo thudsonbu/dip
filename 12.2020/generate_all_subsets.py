@@ -21,6 +21,7 @@ print(generateAllSubsets([1, 2, 3]))
 def insertRight( nums, base ):
     result = []
     idx = 0
+    nextResult = []
 
     while idx < len(nums):
         new = base + [nums[idx]]
@@ -30,5 +31,16 @@ def insertRight( nums, base ):
             nextResult = insertRight( nums[1:], new )
 
         idx += 1
-
+  
     return result + nextResult
+
+def generateAllSubsetsRecursive(nums):
+    unique_subsets = []
+
+    for i in range( 0 , len(nums) ):
+        result = insertRight( nums[i:], [] )
+        unique_subsets += result
+    
+    return unique_subsets
+
+print(generateAllSubsetsRecursive([1, 2, 3]))
