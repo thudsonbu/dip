@@ -43,6 +43,24 @@ class Solution(object):
             return [root.val]
         else:
             return left_leaves + right_leaves
+
+    def leaves_2(self, root):
+        root_stack = []
+        root_stack.append(root)
+        leaves = []
+
+        while len(root_stack) > 0:
+            n = root_stack.pop()
+            if n.right:
+                root_stack.append(n.right)
+            if n.left:
+                root_stack.append(n.left)
+            if not n.left and not n.right:
+                leaves.append(n.val)
+                
+
+        return leaves
+
         
 
 t1 = Node(3)
