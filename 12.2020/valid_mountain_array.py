@@ -29,8 +29,32 @@ class Solution(object):
 
         return False # did not reach end going down, not a mountain
 
+    def valid_mountain_array_state(self, arr):
+        rising = True
+
+        for i in range(1,len(arr)):
+            left = arr[i-1]
+            right = arr[i]
+
+            if left <= right and rising: 
+                continue
+            elif rising:
+                rising = False
+            elif left >= right and not rising:
+                continue
+            else:
+                return False
+        
+        return not rising
+
+
     
 
 print(Solution().valid_mountain_array([1, 2, 3, 2, 1]))
 
 print(Solution().valid_mountain_array([1, 2, 3]))
+
+
+print(Solution().valid_mountain_array_state([1, 2, 3, 2, 1]))
+
+print(Solution().valid_mountain_array_state([1, 2, 3]))
