@@ -20,6 +20,7 @@ function numberTransform( n, m ) {
       operations += 1;
     }
   }
+
   while ( n > m ) {
     n /= 2;
     operations += 1;
