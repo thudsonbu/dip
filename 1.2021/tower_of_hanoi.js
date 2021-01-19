@@ -27,9 +27,10 @@ function towerHanoi( discs ) {
       let stuck_stack = getStuckStack( towers, recent_move );
       let swap = false;
 
-      towers, swap = tryOneGreaterSwap( towers, stuck_stack );
+      towers, swap, recent_move = tryOneGreaterSwap( towers, stuck_stack );
 
       if ( !swap ) {
+        
 
       }
 
@@ -39,12 +40,47 @@ function towerHanoi( discs ) {
 
 }
 
-function tryOneGreaterSwap( towers, stuck_stack ) {
+function tryOtherSwap( towers, stuck_stack ) {
   let swap = false;
+  let recent_move = null;
 
   for ( let i = 0; i < 3 && !swap; i++ ) {
         
     if ( i === stuck_stack ) continue;
+
+    if ( !towers[i][0] ) continue;
+    
+    let top_swap = towers[i][0];
+
+    for ( let j = 0; j < 3 && !swap; j++ ) {
+
+      if ( j === i ) continue;
+
+      if ( !towers[j][0] ) continue;
+
+      let below = towers[j][0];
+
+      if ( top_swap < below && top_swap % 2 !== below % 2 ) {
+        towers[j].push( top_swap );
+        towers[i].pop();
+        recent_move = top_swap;
+        swap = true;
+      }
+    }
+  }
+  
+  return towers, swap, recent_move;
+}
+
+function tryOneGreaterSwap( towers, stuck_stack ) {
+  let swap = false;
+  let recent_move = null;
+
+  for ( let i = 0; i < 3 && !swap; i++ ) {
+        
+    if ( i === stuck_stack ) continue;
+
+    if ( !towers[i][0] ) continue;
     
     let top_swap = towers[i][0];
 
@@ -57,12 +93,13 @@ function tryOneGreaterSwap( towers, stuck_stack ) {
       if ( ( top_swap + 1 ) === below ) {
         towers[j].push( top_swap );
         towers[i].pop();
+        recent_move = top_swap;
         swap = true;
       }
     }
   }
 
-  return towers, swap;
+  return towers, swap, recent_move;
 }
 
 function getStuckStack( towers, recent_move ) {
