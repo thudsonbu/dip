@@ -3,24 +3,53 @@
 // the minimum number of steps in order to complete the game.
 
 function towerHanoi( discs ) {
-  let towers = createTowers( discs );
+  let towers = dics % 2 === 0 ? [ [], [ 1 ], [] ] : [ [], [], [ 1 ] ];
 
-  // if odd first move is two right else one
+  let disc = 2;
+  let recent_move = null;
+  let moves = 1;
 
-  // take one off and place it
+  while ( disc <= discs ) {
+    
+    // place in new disc
+    if ( towers[1].length ) {
+      towers[1].push( disc );
+    } else {
+      towers[2].push( disc );
+    }
 
-  // build stack
+    moves += 1;
+    recent_move = disc;
+    disc += 1;
+
+    while ( true ) {
+
+      stuck_stack = getStuckStack( towers, recent_move );
+
+    }
+
+  } 
+
 
 }
 
-function createTowers( disks ) {
-  let towers = [ [], [], [], ];
+function getStuckStack( towers, recent_move ) {
+  let loc = 0;
 
-  for ( let i = 0; i < disks; i++ ) {
-    towers[0].push( i );
-  }
+  towers.foreach( (tower) => {
 
-  return towers;
+    if ( towers[ towers[loc].length - 1 ] === recent_move ) return loc;
+    loc += 1;
+  })
 }
 
-console.log( createTowers(3) + " should be [ [ 0, 1, 2 ], [], [] ]");
+function checkStackComplete( towers ) {
+  zeros = 0;
+
+  towers.foreach( (tower) => {
+
+    if ( tower.length === 0 ) zeros += 1;
+  });
+
+  return zeros === 2;
+}
