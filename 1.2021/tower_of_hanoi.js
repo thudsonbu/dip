@@ -13,9 +13,9 @@ function towerHanoi( discs ) {
     
     // place in new disc
     if ( towers[1].length ) {
-      towers[1].push( disc );
-    } else {
       towers[2].push( disc );
+    } else {
+      towers[1].push( disc );
     }
 
     moves += 1;
@@ -24,13 +24,45 @@ function towerHanoi( discs ) {
 
     while ( true ) {
 
-      stuck_stack = getStuckStack( towers, recent_move );
+      let stuck_stack = getStuckStack( towers, recent_move );
+      let swap = false;
+
+      towers, swap = tryOneGreaterSwap( towers, stuck_stack );
+
+      if ( !swap ) {
+
+      }
 
     }
 
   } 
 
+}
 
+function tryOneGreaterSwap( towers, stuck_stack ) {
+  let swap = false;
+
+  for ( let i = 0; i < 3 && !swap; i++ ) {
+        
+    if ( i === stuck_stack ) continue;
+    
+    let top_swap = towers[i][0];
+
+    for ( let j = 0; j < 3 && !swap; j++ ) {
+
+      if ( j === i ) continue;
+
+      let below = towers[j][0];
+
+      if ( ( top_swap + 1 ) === below ) {
+        towers[j].push( top_swap );
+        towers[i].pop();
+        swap = true;
+      }
+    }
+  }
+
+  return towers, swap;
 }
 
 function getStuckStack( towers, recent_move ) {
@@ -38,7 +70,8 @@ function getStuckStack( towers, recent_move ) {
 
   towers.foreach( (tower) => {
 
-    if ( towers[ towers[loc].length - 1 ] === recent_move ) return loc;
+    if ( tower.slice(-1)[0] === recent_move ) return loc;
+
     loc += 1;
   })
 }
@@ -48,7 +81,7 @@ function checkStackComplete( towers ) {
 
   towers.foreach( (tower) => {
 
-    if ( tower.length === 0 ) zeros += 1;
+    if ( !tower.length ) zeros += 1;
   });
 
   return zeros === 2;
