@@ -40,6 +40,34 @@ function towerHanoi( discs ) {
 
 }
 
+function analyzeMoves( towers, stuck_stack ) {
+  let best_move = [];
+
+  for ( let i = 0; i < 3; i++ ) {
+    if ( i === stuck_stack || !towers[i].length ) continue;
+
+    for ( let j = 0; j < 3; j++ ) {
+      if ( j === i ) continue;
+
+      
+    }
+  }
+  
+  // for each tower other then stuck
+
+  // compare with other tops
+
+  // skip if tower height is zero
+
+  // if one greater give rating of two
+
+  // if null give rating of 1
+
+  // if greater bottom or odd with odd or even with even give 0
+
+
+}
+
 function tryOtherSwap( towers, stuck_stack ) {
   let swap = false;
   let recent_move = null;
