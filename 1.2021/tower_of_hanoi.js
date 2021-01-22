@@ -98,14 +98,23 @@ console.log(" should be \n{ score: 1, to: 0, from: 1 }");
 
 function getStuckStack( towers, recent_move ) {
   let loc = 0;
+  let out;
 
-  towers.foreach( (tower) => {
+  towers.forEach( (tower) => {
 
-    if ( tower.slice(-1)[0] === recent_move ) return loc;
+    if ( tower.slice(-1)[0] === recent_move ) out = loc;
 
     loc += 1;
   })
+
+  return out;
 }
+
+towers = [[3], [2], [5, 4, 1]];
+console.log( getStuckStack( towers, 2 ) + " should be 1");
+
+towers = [[1], [4, 3, 2], [5]];
+console.log( getStuckStack( towers, 1 ) + " should be 0");
 
 function checkStackComplete( towers ) {
   zeros = 0;
