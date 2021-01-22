@@ -40,8 +40,12 @@ function towerHanoi( discs ) {
 
 }
 
-function analyzeMoves( towers, stuck_stack ) {
-  let best_move = [];
+function findBestMove( towers, stuck_stack ) {
+  let best_move = {
+    score: -1,
+    to: null,
+    from: null,
+  }
 
   for ( let i = 0; i < 3; i++ ) {
     if ( i === stuck_stack || !towers[i].length ) continue;
@@ -49,86 +53,48 @@ function analyzeMoves( towers, stuck_stack ) {
     for ( let j = 0; j < 3; j++ ) {
       if ( j === i ) continue;
 
-      
-    }
-  }
-  
-  // for each tower other then stuck
+      let top = towers[i].slice(-1);
 
-  // compare with other tops
+      // if its a null place give it a 1
+      let bottom;
+      if ( towers[j].length ) {
+       
+        bottom = towers[j].slice(-1);
 
-  // skip if tower height is zero
-
-  // if one greater give rating of two
-
-  // if null give rating of 1
-
-  // if greater bottom or odd with odd or even with even give 0
-
-
-}
-
-function tryOtherSwap( towers, stuck_stack ) {
-  let swap = false;
-  let recent_move = null;
-
-  for ( let i = 0; i < 3 && !swap; i++ ) {
+      } else {
         
-    if ( i === stuck_stack ) continue;
-
-    if ( !towers[i][0] ) continue;
-    
-    let top_swap = towers[i][0];
-
-    for ( let j = 0; j < 3 && !swap; j++ ) {
-
-      if ( j === i ) continue;
-
-      if ( !towers[j][0] ) continue;
-
-      let below = towers[j][0];
-
-      if ( top_swap < below && top_swap % 2 !== below % 2 ) {
-        towers[j].push( top_swap );
-        towers[i].pop();
-        recent_move = top_swap;
-        swap = true;
+        if ( best_move.score < 1 ) {
+          
+          best_move.score = 1;
+          best_move.to = j;
+          best_move.from = i;
+        }
+        continue;
       }
-    }
-  }
-  
-  return towers, swap, recent_move;
-}
 
-function tryOneGreaterSwap( towers, stuck_stack ) {
-  let swap = false;
-  let recent_move = null;
+      // if its one greater give it a two
+      if ( top == bottom-1 ) {
 
-  for ( let i = 0; i < 3 && !swap; i++ ) {
-        
-    if ( i === stuck_stack ) continue;
+        best_move.score = 2;
+        best_move.to = j;
+        best_move.from = i;
+      } 
 
-    if ( !towers[i][0] ) continue;
-    
-    let top_swap = towers[i][0];
-
-    for ( let j = 0; j < 3 && !swap; j++ ) {
-
-      if ( j === i ) continue;
-
-      let below = towers[j][0];
-
-      if ( ( top_swap + 1 ) === below ) {
-        towers[j].push( top_swap );
-        towers[i].pop();
-        recent_move = top_swap;
-        swap = true;
-      }
+      // garbage moves go here
     }
   }
 
-  return towers, swap, recent_move;
+  return best_move;
 }
+
+let towers = [[3], [2], [5, 4, 1]];
+console.log( findBestMove( towers, 1) );
+console.log(" should be \n{ score: 2, to: 1, from: 2 }");
+
+towers = [[], [ 2, 1 ], [ 5, 4, 3 ]];
+console.log( findBestMove( towers, 2) );
+console.log(" should be \n{ score: 1, to: 0, from: 1 }");
+
 
 function getStuckStack( towers, recent_move ) {
   let loc = 0;
