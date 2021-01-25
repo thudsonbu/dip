@@ -3,7 +3,7 @@
 // the minimum number of steps in order to complete the game.
 
 function towerHanoi(discs) {
-  let towers = dics % 2 === 0 ? [[], [1], []] : [[], [], [1]];
+  let towers = discs % 2 === 0 ? [[], [1], []] : [[], [], [1]];
 
   let disc = 2;
   let recent_move = null;
@@ -26,13 +26,22 @@ function towerHanoi(discs) {
       let best_move = findBestMove(towers, recent_move);
 
       towers = makeMove(towers, best_move);
+      moves += 1;
 
       recent_move = best_move.to;
 
       if (checkStackComplete(towers)) break;
     }
   }
+
+  return moves;
 }
+
+let result = towerHanoi(2);
+console.log(result + " should be 3");
+
+result = towerHanoi(3);
+console.log(result + " should be 7");
 
 function makeMove(towers, best_move) {
   let top = towers[best_move.from].pop();
@@ -118,7 +127,7 @@ console.log(getStuckStack(towers, 1) + " should be 0");
 function checkStackComplete(towers) {
   zeros = 0;
 
-  towers.foreach((tower) => {
+  towers.forEach((tower) => {
     if (!tower.length) zeros += 1;
   });
 
