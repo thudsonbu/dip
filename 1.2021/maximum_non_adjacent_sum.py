@@ -1,7 +1,7 @@
 # Given a list of positive integers find the largest possible set such that no
 # elements are adjacent numbers of each other.
 
-def maxNonAdjacentSum( nums ):
+def max_non_adjacent_sum( nums ):
 
   current_max_sum = 0
   previous_max_sum = 0
@@ -13,5 +13,5 @@ def maxNonAdjacentSum( nums ):
 
   return current_max_sum
 
-assert maxNonAdjacentSum( [3, 4, 1, 1] ) == 5
-assert maxNonAdjacentSum( [2, 1, 2, 7, 3] ) == 9
+assert max_non_adjacent_sum( [3, 4, 1, 1] ) == 5
+assert max_non_adjacent_sum( [2, 1, 2, 7, 3] ) == 9
