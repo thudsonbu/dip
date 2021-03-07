@@ -2,29 +2,29 @@
 # from the root)
 
 class Node(object):
-    def __init__(self, val):
-        self.val = val
-        self.left = None
-        self.right = None
+  def __init__(self, val):
+    self.val = val
+    self.left = None
+    self.right = None
 
-    def __repr__(self):
-        # string representation
-        return self.val
+  def __repr__(self):
+    # string representation
+    return self.val
 
 
 def deepest(node):
 
-    if node.left:
-        left_depth = deepest(node.left) or 0
-    else:
-        left_depth = 0
+  if node.left:
+    left_depth = deepest(node.left) or 0
+  else:
+    left_depth = 0
 
-    if node.right:
-        right_depth = deepest(node.right)
-    else:
-        right_depth = 0
+  if node.right:
+    right_depth = deepest(node.right)
+  else:
+    right_depth = 0
 
-    return max(left_depth, right_depth) + 1
+  return max(left_depth, right_depth) + 1
 
 
 root = Node('a')
