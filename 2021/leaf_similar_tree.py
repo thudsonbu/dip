@@ -12,10 +12,6 @@ class Solution(object):
     def leafSimilar(self, root1, root2):
         root1_leaves = self.findLeaves(root1)
         root2_leaves = self.findLeaves(root2)
-
-        print(root1_leaves)
-        print(root2_leaves)
-
     
         return root1_leaves == root2_leaves
 
