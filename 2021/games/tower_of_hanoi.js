@@ -1,4 +1,4 @@
-// There are three towers. The objective of the ggame is to move all the disks over to tower #3.
+// There are three towers. The objective of the game is to move all the disks over to tower #3.
 // You cannot move larger disks on top of smaller disks. Create a function that returns
 // the minimum number of steps in order to complete the game.
 
