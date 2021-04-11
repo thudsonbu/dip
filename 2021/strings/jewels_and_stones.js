@@ -17,7 +17,9 @@ var numJewelsInStones = function (jewels, stones) {
   let count = 0;
 
   for (let i = 0; i < stones.length; i++) {
+    // iterate though stones
     for (let j = 0; j < jewels.length; j++) {
+      // iterate though jewels if found break
       if (stones[i] == jewels[j]) {
         count += 1;
         break;
