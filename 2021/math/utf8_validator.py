@@ -24,9 +24,9 @@ def utf8_validator(bytes):
       return False
   return True
 
-print utf8_validator([0b00000000])
+print(utf8_validator([0b00000000]))
 # True
-print utf8_validator([0b00000000, 10000000])
+print(utf8_validator([0b00000000, 10000000]))
 # False
-print utf8_validator([0b11000000, 10000000])
+print(utf8_validator([0b11000000, 10000000]))
 # True
