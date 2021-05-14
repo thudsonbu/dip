@@ -16,5 +16,3 @@ def canSpell( magazine, note ):
   
 print(canSpell([ 'a', 'b', 'c', 'd', 'e', 'f' ], 'bed'))
 print(canSpell([ 'a', 'b', 'c', 'e', 'f' ], 'bed'))
-
-
