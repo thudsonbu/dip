@@ -2,10 +2,9 @@ const assert = require("assert");
 
 /**
  * Returns the longest palindromic substring in s
- * @param {string}
- * @return {string}
+ * @param {string} - string to search
+ * @return {string} - longets palindrom in string
  */
-
 function longestPalindrome(s) {
   let start;
   let end;
