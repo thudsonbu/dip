@@ -13,6 +13,18 @@ class Solution(object):
             return True
       return False
 
+    def canThreePartsEqualSum(self, A):
+      n = len(A)
+      target = sum(A) / 3
+      current = 0
+      count = 0
+      for n in A:
+        current = current + n
+        if current == target:
+          current = 0
+          count = count + 1
+      return current == 0 and count == 3
+
 
 print(Solution().canThreePartsEqualSumBruteForce(
     [0, 2, 1, -6, 6, -7, 9, 1, 2, 0, 1]))
