@@ -4,7 +4,6 @@
 # the string to the character c in the string s. You can assume that the 
 # character c will appear at least once in the string.
 
-# Here's an example and some starter code:
 def shortest_dist(s, c):
   result = [float('inf')] * len(s)
 
