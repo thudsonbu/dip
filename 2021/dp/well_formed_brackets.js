@@ -5,10 +5,6 @@
 function wellFormedBrackets( n ) {
 	let combinations = ['()'];
 
-	if ( n == 1 ) {
-		return combinations;
-	}
-
 	for ( let i = 0; i < n - 1; i++ ) {
 		let newCombinations = new Set([]);
 
@@ -30,4 +26,4 @@ function wellFormedBrackets( n ) {
 	return combinations;
 }
 
-console.log( wellFormedBrackets( 10 ) );
+console.log( wellFormedBrackets( 1 ) );
