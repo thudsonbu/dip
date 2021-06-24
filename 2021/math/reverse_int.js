@@ -5,27 +5,29 @@
 
 function reverseInteger( int ) {
 	let magnitude = 10;
-	let numArr    = [];
 	let out       = 0;
+	let negative  = 1;
+
+	if ( int < 0 ) {
+		negative = -1;
+		int *= -1;
+	} 
 
 	while ( int > 0 ) {
-		let num = int % magnitude;
+		out *= 10;
 
+		let num = int % magnitude;
 		int -= num;
 
-		numArr.push( num / ( magnitude / 10 ) );
 		magnitude *= 10;
+		out += num;
 	}
 
-	magnitude = magnitude / 10;
-	numArr.forEach(num => {
-		magnitude = magnitude / 10;
-		out += ( num * magnitude );
-	});
-
-	return out;
+	return negative * out;
 }
 
 console.assert( reverseInteger( 24 ), 42 );
 console.assert( reverseInteger( 9 ), 9 );
 console.assert( reverseInteger( 804 ), 408 );
+console.assert( reverseInteger( -29 ), -92 );
+console.assert( reverseInteger( 400 ), 4 );
