@@ -21,7 +21,7 @@ class Solution(object):
       for n in A:
         current = current + n
         if current == target:
-          current = 0
+          current = 0J
           count = count + 1
       return current == 0 and count == 3
 
