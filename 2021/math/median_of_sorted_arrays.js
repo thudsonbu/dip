@@ -6,7 +6,7 @@ function findMedianSortedArrays( nums1, nums2 ) {
 	let sorted = [];
 
 	if ( total === 1 ) {
-		return nums1[0] || nums2[0];
+		return nums1.length ? nums1[0] : nums2[0];
 	}
 
 	// continue till midpoint
@@ -24,10 +24,12 @@ function findMedianSortedArrays( nums1, nums2 ) {
 		}
 	}
 
+	console.log( sorted );
+
 	if ( total % 2 === 0 ) {
 		return ( sorted[ total/2 - 1 ] + sorted[ total/2 ] ) / 2;
 	} else {
-		return sorted[ total/2 + .5 ];
+		return sorted[ total/2 - .5 ];
 	}
 }
 
@@ -36,10 +38,10 @@ let arr2 = [ 3, 4 ];
 
 console.assert( findMedianSortedArrays( arr1, arr2 ) === 2.5 );
 
-arr1 = [ 1 ];
+arr1 = [ 0 ];
 arr2 = [ ];
 
-console.assert( findMedianSortedArrays( arr1, arr2 ) === 1 );
+console.assert( findMedianSortedArrays( arr1, arr2 ) === 0 );
 
 arr1 = [ 0, 0 ];
 arr2 = [ 0, 0 ];
@@ -55,3 +57,8 @@ arr1 = [ 1, 2, 2 ];
 arr2 = [ 4, 6, 9 ]
 
 console.assert( findMedianSortedArrays( arr1, arr2 ) === 3 );
+
+arr1 = [ 1, 3 ];
+arr2 = [ 2 ];
+
+console.assert( findMedianSortedArrays( arr1, arr2 ) === 2 );
