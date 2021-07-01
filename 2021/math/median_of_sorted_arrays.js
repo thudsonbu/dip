@@ -24,8 +24,6 @@ function findMedianSortedArrays( nums1, nums2 ) {
 		}
 	}
 
-	console.log( sorted );
-
 	if ( total % 2 === 0 ) {
 		return ( sorted[ total/2 - 1 ] + sorted[ total/2 ] ) / 2;
 	} else {
