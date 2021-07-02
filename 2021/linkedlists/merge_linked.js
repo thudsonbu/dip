@@ -14,24 +14,59 @@ class Link {
 function mergeLinkedLists( lists ) {
 	let baseList = 0;
 	let min = lists[baseList].val;
-	let index;
+	let minListIndex;
 
 	// find the base list to merge into (will be list with smallest start val)
 	for ( i = 0; i < lists.length; i++ ) {
 		if ( lists[i].val < min ) {
-			baselist = i;
+			baseList = i;
 			min = lists[i].val;
 		}
 	}
 
 	// remove base list
-	lists.slice( baseList, 1 );
+	baseList = lists.splice( baseList, 1 );
+	out = baseList;
 
-	// insert next min if less then base list ref next
-	while ( lists.legth ) {
-		index = 	
+	// while there are still lists to be merged
+	while ( lists.length ) {
+		let next;
 
+		if ( baseList.next ) {
+			next = baseList.next.val;
+		} else {
+			next = Number.POSITIVE_INFINITY;
+		}
+
+		// insert next min if less then base list ref next
+		for ( i = 0; i < lists.length; i++ ) {
+			if ( lists[i].val < next ) {
+				minListIndex = i;
+				min = lists[i].val;
+			}
+		}
+		
+		// if we find a smaller one insert into ll and set ref to it
+		if ( min < next ) {
+			let tmp = baseList.next;
+
+			baseList.next = new Link( min, tmp );
+
+			// set ref to next if next in min list else delete
+			if ( lists[minListIndex].next ) {
+				lists[minListIndex] = lists[minListIndex].next;
+			} else {
+				lists.splice( minListIndex, 1 );
+			}
+		}
+
+		baseList = baseList.next || baseList;
 	}
 
-	// ref of snipped list = next if next else remove from array
+	return out;
 }
+
+const ll1 = new Link( 1, new Link( 3, null ) );
+const ll2 = new Link( 3, null );
+
+console.log( mergeLinkedLists( [ ll1, ll2 ] ) );
