@@ -10,63 +10,80 @@ class Link {
 	}
 }
 
-// takes an array contained sorted linked lists and merges them
-function mergeLinkedLists( lists ) {
-	let baseList = 0;
-	let min = lists[baseList].val;
-	let minListIndex;
+function mergeArrOfLists( lists ) {
+	let pairs = [];
+	
+	while ( lists.length > 1 ) {
 
-	// find the base list to merge into (will be list with smallest start val)
-	for ( i = 0; i < lists.length; i++ ) {
-		if ( lists[i].val < min ) {
-			baseList = i;
-			min = lists[i].val;
-		}
-	}
-
-	// remove base list
-	baseList = lists.splice( baseList, 1 );
-	out = baseList;
-
-	// while there are still lists to be merged
-	while ( lists.length ) {
-		let next;
-
-		if ( baseList.next ) {
-			next = baseList.next.val;
-		} else {
-			next = Number.POSITIVE_INFINITY;
-		}
-
-		// insert next min if less then base list ref next
-		for ( i = 0; i < lists.length; i++ ) {
-			if ( lists[i].val < next ) {
-				minListIndex = i;
-				min = lists[i].val;
-			}
-		}
-		
-		// if we find a smaller one insert into ll and set ref to it
-		if ( min < next ) {
-			let tmp = baseList.next;
-
-			baseList.next = new Link( min, tmp );
-
-			// set ref to next if next in min list else delete
-			if ( lists[minListIndex].next ) {
-				lists[minListIndex] = lists[minListIndex].next;
+		while ( lists.length ) {
+			if ( lists.length > 1 ) {
+				pairs.push( lists.splice( 0, 2 ) );
 			} else {
-				lists.splice( minListIndex, 1 );
+				pairs.push( lists.splice( 0, 1 ) );
 			}
 		}
 
-		baseList = baseList.next || baseList;
+		pairs.forEach( pair => {
+			if ( pair.length > 1 ) {
+				lists.push( mergeTwoLists( pair[0], pair[1] ) );
+			} else {
+				lists.push( pair[0] );
+			}
+		});
+
+		pairs = [];
 	}
 
-	return out;
+	return lists[0];
+}
+
+function mergeTwoLists( list1, list2 ) {
+	let baseList;
+	let mergeList;
+	let head;
+
+	if ( list1.val < list2.val ) {
+		baseList = list1;
+		mergeList = list2;
+	} else {
+		baseList = list2;
+		mergeList = list1;
+	}
+
+	head = baseList;
+
+	while ( mergeList ) {
+
+		if ( !head.next ) {
+			head.next = mergeList;
+
+			break;
+
+		} else if ( mergeList.val < head.next.val ) {
+
+			let tmpNext = head.next;
+			head.next = new Link( mergeList.val, tmpNext );
+
+			mergeList = mergeList.next || null;
+		}
+
+		head = head.next || null;
+	}
+
+	return baseList;
+}
+
+function printList( list ) {
+	while ( list ) {
+		console.log( list.val );
+		list = list.next || null;
+	}
 }
 
 const ll1 = new Link( 1, new Link( 3, null ) );
-const ll2 = new Link( 3, null );
+const ll2 = new Link( 2, null );
+const ll3 = new Link( 3, new Link( 6, null ) );
+const ll4 = new Link( 0, null );
+const ll5 = new Link( 4, new Link( 5, null) );
 
-console.log( mergeLinkedLists( [ ll1, ll2 ] ) );
+printList( mergeArrOfLists( [ ll1, ll2, ll3, ll4, ll5 ] ) );
