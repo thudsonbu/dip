@@ -18,7 +18,7 @@ function findRepeatedDnaSequences( s ) {
 	let foundSet    = new Set();
 	let index       = 9;
 
-	while ( index < s.length ) {
+	while ( index <= s.length ) {
 		let sequence = s.slice( index-10, index );
 
 		if ( sequenceMap.has( sequence ) ) {
@@ -30,7 +30,8 @@ function findRepeatedDnaSequences( s ) {
 		index++;
 	}
 
-	return foundSet;
+	return Array.from( foundSet );
 }
 
 console.log( findRepeatedDnaSequences( "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT" ) );
+console.log( findRepeatedDnaSequences( "AAAAAAAAAAA" ) );
