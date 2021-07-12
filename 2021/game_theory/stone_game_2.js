@@ -17,12 +17,8 @@
  * @param {number[]} piles
  * @return {number}
  */
-function stoneGameII(piles) {
-  const total = piles.reduce( ( total, pile ) => {
-    return total + pile;
-  }, total );
-
-
+function stoneGameII( piles ) {
+  
 };
 
 console.log( stoneGameII( [ 1, 2, 3 ] ) );
