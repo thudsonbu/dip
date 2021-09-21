@@ -1,9 +1,8 @@
-
-function ListNode(val, next) {
-  this.val = (val===undefined ? 0 : val);
-  this.next = (next===undefined ? null : next);
-
-  return this;
+class ListNode {
+  constructor( val, next ) {
+    this.val = val;
+    this.next = next;
+  }
 }
 
 /**
@@ -11,53 +10,51 @@ function ListNode(val, next) {
  * @param {ListNode} l2
  * @return {ListNode}
  */
-var addTwoNumbers = function(l1, l2) {
+function addTwoNumbers( l1, l2 ) {
+  let ref;
+  let head;
+  let sum = 0;
   let carry = 0;
-  let list;
-  let sum;
 
-  while ( l1.next || l2.next ) {
+  while ( l1 && l2 ) {
     sum = l1.val + l2.val + carry;
 
-    console.log( 'iteration' );
-    console.log( l1 );
-
-    if ( sum >= 10 ) {
-      sum = sum - 10;
+    if ( sum > 9 ) {
+      sum -= 10;
       carry = 1;
     } else {
       carry = 0;
     }
 
-    console.log( l1 );
-
-    if ( list ) {
-      list.next = ListNode( sum, undefined );
-      list = list.next;
+    if ( ref ) {
+      ref.next = new ListNode( sum, undefined );
+      ref = ref.next;
     } else {
-      list = ListNode( sum, undefined );
+      ref = new ListNode( sum, undefined );
+      head = ref;
     }
 
-    console.log( l1 );
-
-    l1 = l1.next ? l1.next : { val: 0 };
-    l2 = l2.next ? l2.next : { val: 0 };
+    l1 = l1.next ? l1.next : undefined;
+    l2 = l2.next ? l2.next : undefined;
   }
 
-  return list;
+  if ( l1 ) {
+    ref.next = new ListNode( l1.val + carry, l1.next );
+  }
+
+  if ( l2 ) {
+    ref.next = new ListNode( l2.val + carry, l2.next );
+  }
+
+  return head;
 };
 
-const l1 = ListNode( 1, undefined )
-const l2 = ListNode( 5, l1 );
-const l3 = ListNode( 3, l2 );
+const l1 = new ListNode( 1, new ListNode( 2, new ListNode( 5, undefined ) ) );
+const l2 = new ListNode( 3, new ListNode( 9, undefined ) );
 
-const l4 = ListNode( 6, undefined );
-const l5 = ListNode( 1, l4 );
+console.log( addTwoNumbers( l1, l2 ) );
 
-const list = addTwoNumbers( l3, l5 );
+const l3 = new ListNode( 1, new ListNode( 2, new ListNode( 5, undefined ) ) );
+const l4 = new ListNode( 3, undefined );
 
-while ( list.next ) {
-  console.log( list.val );
-
-  list = list.next;
-}
+console.log( addTwoNumbers( l3, l4 ) );
