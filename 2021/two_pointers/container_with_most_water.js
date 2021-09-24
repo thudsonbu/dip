@@ -6,21 +6,31 @@ const assert = require('assert');
 //the x-axis forms a container, such that the container contains the most water.
 
 function maxArea( heights ) {
-  let width = heights.length - 1;
-  let max = 0;
+  let left = 0;
+  let right = heights.length - 1;
+  let max = Math.min( heights[ left ], heights[ right ] ) * ( right - left );
 
-  while ( width > 0 ) {
-    let left = 0;
-
-    while ( ( left + width ) < heights.length ) {
-      let height = Math.min( heights[ left ], heights[ left + width ] );
-
-      max = Math.max( ( height * width ), max );
-
+  while ( right !== left ) {
+    if ( heights[ left ] < heights[ right ] ) {
       left++;
-    }
 
-    width = width - 1;
+      if ( heights[ left ] > heights[ left - 1 ] ) {
+        max = Math.max(
+          ( Math.min( heights[ left ], heights[ right ] ) * ( right - left ) ),
+          max
+        );
+      }
+
+    } else {
+      right -= 1;
+
+      if ( heights[ right ] > heights[ right + 1 ] ) {
+        max = Math.max(
+          ( Math.min( heights[ left ], heights[ right ] ) * ( right - left ) ),
+          max
+        );
+      }
+    }
   }
 
   return max;
