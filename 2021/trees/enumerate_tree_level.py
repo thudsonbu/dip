@@ -6,7 +6,18 @@ class Node():
     self.left = left
     self.right = right
 
-def valuesAtHeight(root, target_height, current_height ):
+def valuesAtHeight2(root, target_height):
+  if root == None:
+    return []
+  if target_height == 1:
+    return [root.value]
+
+  leftNodeValues = valuesAtHeight2(root.left, target_height - 1)
+  rightNodeValues = valuesAtHeight2(root.right, target_height - 1)
+
+  return leftNodeValues + rightNodeValues
+
+def valuesAtHeight(root, target_height, current_height):
   if current_height == target_height:
     return [root.value]
 
@@ -22,7 +33,6 @@ def valuesAtHeight(root, target_height, current_height ):
     return out
 
 
-
 #     1
 #    / \
 #   2   3
@@ -36,4 +46,5 @@ a.left.left = Node(4)
 a.left.right = Node(5)
 a.right.right = Node(7)
 print( valuesAtHeight(a, 3, 1) )
+print( valuesAtHeight2(a, 3) )
 # [4, 5, 7]
