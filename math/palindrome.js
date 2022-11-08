@@ -29,7 +29,7 @@ function isPalindrome(x) {
   let lowMag = 10;
   let highMag = magnitude / 10;
 
-  while (lowMag < highMag) {
+  while (lowMag <= highMag) {
     // covert pointers corresponding digits to the same magnitude
     let lowDig = (x % lowMag) / (lowMag / 10);
     let highDig = Math.floor(x / highMag);
@@ -61,8 +61,10 @@ const cases = [
   { val: 200, out: false },
   { val: 10, out: false },
   { val: 44445, out: false },
+  { val: 4444544, out: false },
   { val: 34543, out: true },
   { val: 111111111111111, out: true },
+  { val: 1000030001, out: false },
 ];
 
 for (const { val, out } of cases) {
