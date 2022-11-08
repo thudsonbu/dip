@@ -33,5 +33,5 @@ function longestPalindrome(s) {
 }
 
 assert(longestPalindrome("aba"), "aba");
-assert(longestPalindrome("abcdcrs"),"cdc");
-assert(longestPalindrome("eicaaoecekeke"), "ekeke")
+assert(longestPalindrome("abcdcrs"), "cdc");
+assert(longestPalindrome("eicaaoecekeke"), "ekeke");
