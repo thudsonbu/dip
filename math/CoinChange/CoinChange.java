@@ -1,28 +1,48 @@
 package math.CoinChange;
 
-import java.util.Arrays;
-import java.util.Stack;
+import java.util.HashMap;
 
 public class CoinChange {
   public int coinChange(int[] coins, int amount) {
-    Arrays.sort(coins);
-    Stack<Integer> coinsUsed = new Stack<>();
-
-    int coinIdx = coins.length - 1;
-    int coinVal = coins[coinIdx];
-
-    while (amount > 0) {
-      while (amount > coinVal) {
-        amount -= coinVal;
-        coinsUsed.push(coinVal);
-      }
-
-      coinIdx--;
-      coinVal
+    if (coins.length == 0) {
+      return -1;
     }
 
-    return coinCount;
+    if (amount == 0) {
+      return 0;
+    }
+
+    HashMap<Integer, Integer> amtToCoinCt = new HashMap<>();
+
+    amtToCoinCt.put(0, 0);
+
+    int result = this.changeRecursiveHelper(coins, amount, amtToCoinCt);
+
+    if (result < 0) {
+      return -1;
+    }
+
+    return result;
   }
 
-  public void 
+  public int changeRecursiveHelper(int[] coins, int amount, HashMap<Integer, Integer> map) {
+    if (map.containsKey(amount)) {
+      return map.get(amount);
+    }
+
+    int minSteps = Integer.MAX_VALUE;
+
+    for (int coin : coins) {
+      if (coin > amount)
+        continue;
+
+      int coinMin = changeRecursiveHelper(coins, amount - coin, map);
+
+      minSteps = Math.min(coinMin, minSteps);
+    }
+
+    map.put(amount, minSteps + 1);
+
+    return minSteps + 1;
+  }
 }
