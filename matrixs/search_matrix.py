@@ -15,7 +15,7 @@ class Solution:
         high = len(matrix)-1
         low = 0
 
-        while high > low+1:
+        while low <= high:
             center = math.floor(low + ((high - low)/2))
 
             if matrix[center][0] < target:
@@ -29,5 +29,31 @@ class Solution:
         for element in searchRow:
             if element == target:
                 return True
+
+        return False
+
+    def searchMatrix2(self, matrix, target):
+        m = len(matrix)
+
+        if m == 0:
+            return False
+
+        n = len(matrix[0])
+
+        # binary search
+        left = 0
+        right = m * n - 1
+
+        while left <= right:
+                pivot_idx = (left + right) // 2
+                pivot_element = matrix[pivot_idx // n][pivot_idx % n]
+
+                if target == pivot_element:
+                    return True
+                else:
+                    if target < pivot_element:
+                        right = pivot_idx - 1
+                    else:
+                        left = pivot_idx + 1
 
         return False
