@@ -6,15 +6,15 @@ class KthLargest {
   k: number;
 
   constructor(k: number, numbers: number[]) {
-    this.numbers = numbers.sort().slice(-k);
+    this.numbers = numbers.sort((a, b) => a - b).slice(-k);
     this.k = k;
   }
 
   add(nextNumber: number): number {
     let highIndex = this.numbers.length - 1;
     let lowIndex = 0;
-
     let middleIndex = 0;
+
     while (highIndex > lowIndex + 1) {
       middleIndex = Math.floor((highIndex - lowIndex) / 2) + lowIndex;
 
@@ -28,7 +28,7 @@ class KthLargest {
     let spliceIndex = lowIndex;
     if (
       this.numbers[lowIndex] < nextNumber &&
-      this.numbers[highIndex] > nextNumber
+      this.numbers[highIndex] >= nextNumber
     ) {
       spliceIndex = lowIndex + 1;
     } else if (this.numbers[highIndex] < nextNumber) {
@@ -45,9 +45,26 @@ class KthLargest {
   }
 }
 
-const myKLargest = new KthLargest(2, [0]);
+let myKLargest = new KthLargest(2, [0]);
 
 console.log(myKLargest.add(-1));
 console.log(myKLargest.numbers);
+console.log(myKLargest.add(0));
+console.log(myKLargest.numbers);
 console.log(myKLargest.add(9));
+console.log(myKLargest.numbers);
+
+myKLargest = new KthLargest(3, [5, 7, 6]);
+
+console.log(myKLargest.add(3));
+console.log(myKLargest.numbers);
+console.log(myKLargest.add(8));
+console.log(myKLargest.numbers);
+console.log(myKLargest.add(7));
+console.log(myKLargest.numbers);
+console.log(myKLargest.add(10));
+console.log(myKLargest.numbers);
+
+myKLargest = new KthLargest(7, [-10, 1, 3, 1, 4, 10, 3, 9, 4, 5, 1]);
+
 console.log(myKLargest.numbers);
