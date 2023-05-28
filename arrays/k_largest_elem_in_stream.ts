@@ -25,9 +25,15 @@ class KthLargest {
       }
     }
 
-    let spliceIndex = highIndex;
-
-    if (this.numbers[spliceIndex] < nextNumber) spliceIndex++;
+    let spliceIndex = lowIndex;
+    if (
+      this.numbers[lowIndex] < nextNumber &&
+      this.numbers[highIndex] > nextNumber
+    ) {
+      spliceIndex = lowIndex + 1;
+    } else if (this.numbers[highIndex] < nextNumber) {
+      spliceIndex = highIndex + 1;
+    }
 
     this.numbers.splice(spliceIndex, 0, nextNumber);
 
