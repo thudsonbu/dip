@@ -51,3 +51,48 @@ function getIntersectionNode2(
 
   return p1;
 }
+
+function getIntersectionNode3(
+  headA: ListNode | null,
+  headB: ListNode | null
+): ListNode | null {
+  let headALength = 0;
+  let headBLength = 0;
+
+  let p1 = headA;
+  let p2 = headB;
+
+  while (p1) {
+    headALength++;
+    p1 = p1.next;
+  }
+
+  while (p2) {
+    headBLength++;
+    p2 = p2.next;
+  }
+
+  let diff = Math.abs(headALength - headBLength);
+
+  p1 = headA;
+  p2 = headB;
+
+  if (headALength > headBLength) {
+    while (diff > 0) {
+      p1 = p1.next;
+      diff--;
+    }
+  } else {
+    while (diff > 0) {
+      p2 = p2.next;
+      diff--;
+    }
+  }
+
+  while (p1 !== p2) {
+    p1 = p1.next;
+    p2 = p2.next;
+  }
+
+  return p1;
+}
