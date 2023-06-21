@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 function insertToSortedArray<T>({
   array,
   element,
@@ -34,6 +36,28 @@ function insertToSortedArray<T>({
 
 const array = [];
 
+const getValue = (el) => JSON.parse(el).value;
+
+const lodashArray = [];
+console.time("lodash");
+for (let i = 0; i < 100000; i++) {
+  const element = JSON.stringify({ value: Math.random() * 100 });
+  lodashArray.splice(_.sortedIndexBy(lodashArray, getValue), 0, element);
+}
+console.timeEnd("lodash");
+
+const myArray = [];
+console.time("myArray");
+for (let i = 0; i < 100000; i++) {
+  const element = JSON.stringify({ value: Math.random() * 100 });
+  insertToSortedArray({
+    array: myArray,
+    element,
+    getValue
+  });
+}
+console.timeEnd("myArray");
+
 outer: for (let i = 0; i < 1000; i++) {
   insertToSortedArray({
     array,
@@ -42,7 +66,7 @@ outer: for (let i = 0; i < 1000; i++) {
   });
   const arrayCopy = [...array];
   arrayCopy.sort((a, b) => a - b);
-  inner: for (let i = 0; i < array.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     if (array[i] !== arrayCopy[i]) {
       console.log(array, arrayCopy, array[i], arrayCopy[i]);
       break outer;
